@@ -14,6 +14,9 @@ img {
 // THESE ARE EXAMPLES YOU CAN MODIFY
 // create your own classes
 // to make views framework-neutral
+.container{
+  max-width: 1170px;
+}
 .column {
   @extend .col-md-6;
   @extend .text-center;
@@ -43,3 +46,11 @@ section {
   @extend .row;
   margin-top: 20px;
   }
+
+.navbar-nav{
+  width: 92%;
+}
+
+table{
+  width: 100%;
+}

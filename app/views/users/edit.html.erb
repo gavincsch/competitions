@@ -1,0 +1,45 @@
+<%= form_for @user, :html => {:class => 'form-horizontal well new_user'} do |f| %>
+    <% if @user.errors.any? %>
+        <div class="error_explanation">
+          <h2><%= pluralize(@user.errors.count, "error") %> prohibited this signature from being saved:</h2>
+
+          <ul>
+            <% @user.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <fieldset>
+      <div class="control-group">
+        <%= f.label :name, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field  :name, :required => false, :autofocus => true, :size => '40' %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :email, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.email_field :email, :required => false, :size => '40' %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :password, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.password_field :password, :required => false %>
+        </div>
+      </div>
+      <% if @isAdmin %>
+          <div class="control-group">
+            <%= f.label :admin, :class => 'control-label' %>
+            <div class="controls">
+              <input type="checkbox" id="user[admin]" name='user[admin]' default="false"  value="1">
+            </div>
+          </div>
+      <% end %>
+    </fieldset>
+    <div class="form-actions">
+      <%= f.submit 'edit' , :class => 'btn btn-success' %>
+      <%= link_to 'cancel', :back , :class => 'btn btn-danger'  %>
+    </div>
+<%	end  %>

@@ -3,13 +3,15 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 gem 'mysql2'
-gem 'devise'
 gem 'twitter'
 gem 'bootstrap-sass'
 gem 'simple_form'
 gem 'country_select'
 gem 'rmagick', '2.13.2'
 gem 'jquery-rails'
+
+
+gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
 
 group :assets do
   gem 'sass-rails', '~> 4.0.0'
@@ -21,6 +23,7 @@ end
 
 group :development do
   gem 'rails_layout'
+  gem 'letter_opener'
 end
 
 

@@ -1,0 +1,48 @@
+<div class="modal-header">
+  <button aria-hidden="true" class="close" data-dismiss="modal" type="button">×</button>
+  <h3 id="myModalLabel">New User</h3>
+</div>
+<div class="modal-body">
+<%= form_for @user, :html => {:class => 'form-horizontal well new_user'} do |f| %>
+    <% if @user.errors.any? %>
+        <div class="error_explanation">
+          <h2><%= pluralize(@user.errors.count, "error") %> prohibited this signature from being saved:</h2>
+
+          <ul>
+            <% @user.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <fieldset>
+      <div class="control-group">
+        <%= f.label :name, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field  :name, :required => true, :autofocus => true, :size => '35' %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :email, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.email_field :email, :required => true, :size => '35' %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= f.label :admin, :class => 'control-label' %>
+        <div class="controls">
+          <input type="checkbox" id="user[admin]" name='user[admin]' default="false"  value="1">
+        </div>
+      </div>
+    </fieldset>
+      <div class="form-actions">
+        <%= f.submit 'register user' %>
+      </div>
+
+
+<%	end  %>
+</div>
+<div class="modal-footer">
+
+</div>
