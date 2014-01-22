@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
 
   validates :name, :presence => true, :length => { :minimum => 5 }
   validates :email, :presence => true, :uniqueness => true
+  validates_length_of :password, :in => 6..20, :allow_blank => true, :on => :update
+  validates_confirmation_of :password
 
 
   #callbacks

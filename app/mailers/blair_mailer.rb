@@ -8,4 +8,11 @@ class BlairMailer < ActionMailer::Base
     @password = password
     mail to: @user.email , subject: "Your Login Details..."
   end
+
+  def user_update(user, password)
+    @user = user
+    @password = password
+    mail to: @user.email , subject: "Your Updated Login Details..."
+  end
+
 end

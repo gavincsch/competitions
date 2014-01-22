@@ -1,0 +1,18 @@
+<h1><%= @gallery.album_name %></h1>
+
+
+<%= link_to "Upload an Image", "#", {:class => "btn imageUploadModal", :remote => true, 'data-toggle' => 'modal', 'data-target' => '#ImageUpload' } %>
+
+
+<% @images.each_slice(4) do |slice| %>
+    <div class="row">
+      <% @images.each do |image| %>
+          <div class="col-md-3">
+            <%= image_tag image.images.thumb.url %>
+          </div>
+      <% end %>
+    </div>
+<% end %>
+
+
+<%= render :partial => 'images/partials/image_upload' %>

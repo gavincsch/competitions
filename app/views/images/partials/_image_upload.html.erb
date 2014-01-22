@@ -1,0 +1,21 @@
+<div class="modal fade" id="ImageUpload" title="My modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button aria-hidden="true" class="close" data-dismiss="modal" type="button">×</button>
+        <h3 id="modalTitle">Upload Image</h3>
+      </div>
+      <%= form_for @image,  :html => { :multipart => true } do |image| %>
+          <div class="modal-body">
+
+                <%= image.hidden_field :fk_gallery_id, :value => @gallery.id  %>
+                <%= image.file_field :images %>
+
+          </div>
+          <div class="modal-footer">
+            <%= image.submit :upload, :id => 'image-upload', :class => "close" %>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>

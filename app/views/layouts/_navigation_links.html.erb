@@ -3,12 +3,12 @@
   <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu3">
     <li><a>Subscriptions</a></li>
     <li><a>Competitions</a></li>
-    <li><a>Images</a></li>
+    <li><%=link_to 'Images',galleries_path%></li>
   </ul>
 </li>
 
 <div class="pull-right">
-  <li class="navbar-brand pull-left"><%= @currentUser.name %></li>
+  <li class="navbar-brand pull-left"><%= @userAuthenticated.name %></li>
   <%= link_to 'logout', sessions_destroy_path,  class: 'navbar-brand pull-left' %>
 </div>
 
@@ -16,7 +16,13 @@
 <li class="pull-right dropdown">
   <a href="#" data-toggle="dropdown" class="navbar-brand">Admin <span class="caret"></span></a>
   <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu3">
-        <li><%= link_to 'Edit Users', users_path %></li>
+        <li>
+          <%  if @isAdmin %>
+            <%= link_to 'Users', users_path %>
+          <% else %>
+            <%= link_to 'User', edit_user_path(@userAuthenticated) %>
+          <% end %>
+        </li>
         <li><a>Company Info</a></li>
   </ul>
 </li>

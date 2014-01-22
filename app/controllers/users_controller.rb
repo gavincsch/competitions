@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  layout "login_layout", :only => [:sign_in]
   before_filter :confirm_logged_in, :except => [:sign_in]
   before_filter :is_admin
   def index
@@ -49,10 +50,13 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(user_params)
-        BlairMailer.new_user_invite(@user, @password).deliver
-        format.html { redirect_to :action => 'index', notice: 'User was successfully created.' }
+        unless @password.blank?
+          BlairMailer.user_update(@user, @password).deliver
+        end
+
+        format.html { redirect_to :action => 'index', notice: 'User was successfully updated.' }
       else
-        format.html { render action: 'edut' }
+        format.html { render action: 'edit', :notice => 'error saving' }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
@@ -69,6 +73,6 @@ class UsersController < ApplicationController
 
 
   def user_params
-    params.require(:user).permit(:name, :email, :password ,:admin)
+    params.require(:user).permit(:name, :email, :password ,:admin ,:password_confirmation)
   end
 end

@@ -11,7 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140119155058) do
+ActiveRecord::Schema.define(version: 20140120170413) do
+
+  create_table "galleries", force: true do |t|
+    t.string   "album_name"
+    t.integer  "image_count"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "galleries", ["album_name"], name: "index_galleries_on_album_name", using: :btree
+
+  create_table "images", force: true do |t|
+    t.string   "images"
+    t.string   "image_name"
+    t.integer  "fk_gallery_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "images", ["image_name"], name: "index_images_on_image_name", using: :btree
 
   create_table "sessions", force: true do |t|
     t.string   "session_id", null: false

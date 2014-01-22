@@ -1,4 +1,4 @@
-<%= form_for @user, :html => {:class => 'form-horizontal well new_user'} do |f| %>
+<%= form_for @user, :html => {:class => 'form-horizontal well new_user' , :role => 'form'} do |f| %>
     <% if @user.errors.any? %>
         <div class="error_explanation">
           <h2><%= pluralize(@user.errors.count, "error") %> prohibited this signature from being saved:</h2>
@@ -11,35 +11,31 @@
         </div>
     <% end %>
     <fieldset>
-      <div class="control-group">
+      <div class="form-group">
         <%= f.label :name, :class => 'control-label' %>
-        <div class="controls">
-          <%= f.text_field  :name, :required => false, :autofocus => true, :size => '40' %>
-        </div>
+          <%= f.text_field  :name, :required => false, :autofocus => true, :size => '40', :class => 'form-control' %>
       </div>
-      <div class="control-group">
+      <div class="form-group">
         <%= f.label :email, :class => 'control-label' %>
-        <div class="controls">
-          <%= f.email_field :email, :required => false, :size => '40' %>
-        </div>
+          <%= f.email_field :email, :required => false, :size => '40', :class => 'form-control' %>
       </div>
-      <div class="control-group">
+      <div class="form-group">
         <%= f.label :password, :class => 'control-label' %>
-        <div class="controls">
-          <%= f.password_field :password, :required => false %>
-        </div>
+          <%= f.password_field :password, :required => false, :class => 'form-control' %>
       </div>
-      <% if @isAdmin %>
-          <div class="control-group">
+      <div class="form-group">
+        <%= f.label :password_confirmation, :class => 'control-label' %>
+        <%= f.password_field :password_confirmation, :required => false, :class => 'form-control' %>
+      </div>
+      <% if  @isAdmin %>
+          <div class="form-group">
             <%= f.label :admin, :class => 'control-label' %>
-            <div class="controls">
-              <input type="checkbox" id="user[admin]" name='user[admin]' default="false"  value="1">
-            </div>
+              <input type="checkbox" class="form-control" id="user[admin]" name='user[admin]' <%= @isAdmin ? 'checked' : '' %> value="1">
           </div>
       <% end %>
     </fieldset>
     <div class="form-actions">
-      <%= f.submit 'edit' , :class => 'btn btn-success' %>
+      <%= f.submit 'edit' , :class => 'btn btn-default' %>
       <%= link_to 'cancel', :back , :class => 'btn btn-danger'  %>
     </div>
 <%	end  %>

@@ -11,12 +11,13 @@ class ApplicationController < ActionController::Base
       redirect_to(:controller => 'users', :action => 'sign_in')
       return false # halts the before_filter
     else
-      unless session[:last_seen] > 10.minutes.ago
+      unless session[:last_seen] > 100.minutes.ago
         reset_session
         flash[:notice] = "session expired please log in."
         redirect_to(:controller => 'users', :action => 'sign_in')
         return false # halts the before_filter
       else
+        @userAuthenticated  = User.find(session[:user_id])
         session[:last_seen] = Time.now
         return true
       end

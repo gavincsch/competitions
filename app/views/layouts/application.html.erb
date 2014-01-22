@@ -10,7 +10,7 @@
   </head>
   <body>
     <header>
-      <%= @currentUser ? (render 'layouts/navigation') : '' %>
+      <%= @userAuthenticated ? (render 'layouts/navigation') : '' %>
     </header>
     <main role="main">
        <%= render 'layouts/messages' %>

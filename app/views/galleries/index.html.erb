@@ -1,0 +1,23 @@
+<h1>Galleries</h1>
+<h2>Create A New gallery</h2>
+<%= render :partial => 'galleries/partials/form' %>
+<ul>
+  <% @galleries.each do |gallery| %>
+      <li>
+        <%= gallery.album_name %>
+        <%= link_to 'Go To Gallery', "#{gallery.id}" %>
+
+        <% @images.each_slice(6) do |slice| %>
+            <div class="row">
+              <% @images.each do |image| %>
+                  <% if image.fk_gallery_id === gallery.id %>
+                      <div class="col-md-2">
+                        <%= image_tag image.images.thumb.url %>
+                      </div>
+                  <% end %>
+              <% end %>
+            </div>
+        <% end %>
+      </li>
+  <% end %>
+</ul>

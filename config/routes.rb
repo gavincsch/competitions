@@ -1,6 +1,8 @@
 Blair::Application.routes.draw do
 
 
+  resources :galleries
+  resources :images
   resources :index
   get 'users/sign_in' => 'users#sign_in'
   resources :users

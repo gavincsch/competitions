@@ -21,12 +21,15 @@ group :assets do
   gem 'carrierwave'
 end
 
-group :development do
+group :development, :test do
   gem 'rails_layout'
   gem 'letter_opener'
+  gem 'rspec-rails'   , '~> 3.0.0.beta'
+  gem 'guard-rspec'
+  gem 'guard-livereload'
+  gem 'capybara', '2.1.0'
+  gem 'factory_girl_rails'
 end
-
-
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
