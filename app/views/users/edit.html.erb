@@ -30,7 +30,7 @@
       <% if  @isAdmin %>
           <div class="form-group">
             <%= f.label :admin, :class => 'control-label' %>
-              <input type="checkbox" class="form-control" id="user[admin]" name='user[admin]' <%= @isAdmin ? 'checked' : '' %> value="1">
+            <%= f.check_box :admin, :class => 'form-control', :value => '1', :checked => @user.admin ? 'checked' : '' %>
           </div>
       <% end %>
     </fieldset>

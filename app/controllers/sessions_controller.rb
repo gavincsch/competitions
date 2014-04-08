@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
     session[:user_id] = nil
     session[:username] = nil
     session[:last_seen] = nil
-    flash[:notice] = "See you soon!"
-    redirect_to(:controller => 'users', :action => 'index')
+    flash[:notice] = "Logged Out, See you soon!"
+    redirect_to(:controller => 'users', :action => 'sign_in')
   end
 end

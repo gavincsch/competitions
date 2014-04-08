@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col-md-8">
+      <h1>Competitions</h1>
+    </div>
+    <div class="col-md-4">
+      <%= link_to 'New competition', new_competition_path, :class => 'btn btn-primary' %>
+    </div>
+</div>
+
+<table>
+  <tr>
+    <th>Competition</th>
+    <th>Status</th>
+    <th>Start Date</th>
+    <th>End Date</th>
+    <th>Entries</th>
+    <th></th>
+  </tr>
+  <% @campaigns.each do |campaign| %>
+      <tr>
+        <td><%= link_to campaign.campaign, campaign.campaign_url %></td>
+        <td><%= campaign.active ? 'Active' : 'Inactive' %></td>
+        <td><%= campaign.date_from.to_formatted_s(:short) %></td>
+        <td><%= campaign.date_from.to_formatted_s(:short) %></td>
+        <td><%=	 campaign.entries.count %></td>
+        <td>
+          <div class="row">
+            <%= link_to 'edit', edit_competition_path(campaign.campaign), :class => 'btn btn-primary' %>
+          </div>
+          <div class="row">
+            <%= link_to 'delete', campaign, method: :delete, :data => {:confirm => "Are your sure?"}, :class => 'btn btn-danger' %>
+          </div>
+        </td>
+      </tr>
+  <% end %>
+</table>
+
+

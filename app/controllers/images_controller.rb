@@ -16,12 +16,11 @@ class ImagesController < ApplicationController
 
   def create
     @image = Image.new(image_params)
-
     respond_to do |format|
       if @image.save
-        format.html { redirect_to gallery_url(@image.fk_gallery_id), :notice => 'Image was successfully uploaded.' }
+        format.html { redirect_to gallery_url(@image.gallery_id), :notice => 'Image was successfully uploaded.' }
       else
-        format.html {redirect_to gallery_path(@image.fk_gallery_id), :notice => 'error.'}
+        format.html {redirect_to gallery_path(@image.gallery_id), :notice => 'error.'}
         format.json { render json: @image.errors, status: :unprocessable_entity }
       end
     end
@@ -29,7 +28,7 @@ class ImagesController < ApplicationController
 
 
   def image_params
-    params.require(:image).permit(:images, :image_name, :fk_gallery_id)
+    params.require(:image).permit(:images, :image_name, :gallery_id)
   end
 
 end

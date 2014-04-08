@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  before_filter  :is_admin
   helper_method :current_user
 
   def confirm_logged_in
@@ -29,6 +30,7 @@ class ApplicationController < ActionController::Base
     unless session[:user_id]
       return false
     else
+      @userAuthenticated  = User.find(session[:user_id])
       return true
     end
   end

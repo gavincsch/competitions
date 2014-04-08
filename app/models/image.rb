@@ -1,6 +1,6 @@
 class Image < ActiveRecord::Base
   mount_uploader :images, ImagesUploader
-  belongs_to :gallery, :counter_cache => :image_count
+  belongs_to :gallery, foreign_key: :gallery_id, counter_cache: :image_count
 
   validate :img_uniqueness
 

@@ -1,0 +1,19 @@
+<div class="modal fade" id="galleryCreate" title="Create Gallery">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button aria-hidden="true" class="close" data-dismiss="modal" type="button">×</button>
+        <h3 id="modalTitle">Create A New gallery</h3>
+      </div>
+      <%= form_for @gallery do |f|  %>
+          <div class="modal-body">
+            <%= f.label :album_name, 'Gallery Name:' %>
+            <%= f.text_field :album_name %>
+          </div>
+          <div class="modal-footer">
+            <%= f.submit :create, :class => 'btn btn-primary' %>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>
