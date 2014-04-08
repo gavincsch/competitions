@@ -1,5 +1,4 @@
 require "bundler/capistrano"
-require "delayed/recipes"
 
 set :stages, %w(production staging)
 set :default_stage, "staging"
@@ -75,6 +74,6 @@ namespace :deploy do
 
   after "deploy:assets:precompile", "deploy:reset_ownership"
 
-  after "deploy:restart", "delayed_job:restart"
+  after "deploy:restart"
 
 end
