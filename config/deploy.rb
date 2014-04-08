@@ -46,7 +46,7 @@ namespace :deploy do
   before "deploy:update_code", "deploy:change_ownership"
 
   task :change_ownership, roles: :app do
-    run "#{try_sudo} chown -R #{user}:#{user} /var/www/blair.zando.co.za"
+    run "#{try_sudo} chown -R #{user}:#{user} /var/www/blair.dev"
   end
 
   task :symlink_config, roles: :app do
