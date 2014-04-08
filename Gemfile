@@ -7,7 +7,7 @@ gem 'twitter'
 gem 'bootstrap-sass'
 gem 'simple_form'
 gem 'country_select'
-gem 'rmagick', '2.13.2'
+gem 'mini_magick'
 gem 'jquery-rails'
 
 
@@ -27,7 +27,7 @@ group :development, :test do
   gem 'rspec-rails'   , '~> 3.0.0.beta'
   gem 'guard-rspec'
   gem 'guard-livereload'
-  gem 'capybara', '2.1.0'
+  gem 'capybara', '2.2.1'
   gem 'factory_girl_rails'
 end
 

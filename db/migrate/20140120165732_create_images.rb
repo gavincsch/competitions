@@ -3,7 +3,7 @@ class CreateImages < ActiveRecord::Migration
     create_table :images do |t|
         t.string    :images
         t.string    :image_name
-        t.integer   :fk_gallery_id
+        t.integer   :gallery_id
         t.index     :image_name
 
       t.timestamps

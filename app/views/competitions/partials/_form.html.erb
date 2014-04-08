@@ -1,0 +1,75 @@
+<%= form_for @campaign, :html => {:class => 'form-horizontal well', :role => 'form'} do |f| %>
+    <% if @campaign.errors.any? %>
+        <div class="error_explanation">
+          <h2><%= pluralize(@campaign.errors.count, "error") %> prohibited this signature from being saved:</h2>
+
+          <ul>
+            <% @campaign.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <fieldset>
+      <div class="control-group">
+        <%= f.label :campaign, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field  :campaign, :required => true, :autofocus => true %>
+        </div>
+      </div>
+      <% # TODO DATEPICKER %>
+      <div class="control-group">
+        <%= f.label :date_from, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.datetime_select :date_from %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :date_to, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.datetime_select :date_to %>
+        </div>
+      </div>
+      <div class="control-group enterImage">
+        <%= f.label :enter_image, :class => 'control-label' %>
+        <div class="controls">
+          <%= link_to "Choose an Image", "#", {:class => "btn imageSelectModal", :remote => true, 'data-toggle' => 'modal', 'data-target' => '#ImageSelect', 'data-preview' =>'enterImagePreview'} %>
+          <input id="competitionEnterImage" name='competition[enter_image]' type='hidden' value=''/>
+        </div>
+      </div>
+      <div class="control-group thanksImage">
+        <%= f.label :thankyou_image, :class => 'control-label' %>
+        <div class="controls">
+          <%= link_to "Choose an Image", "#", {:class => "btn imageSelectModal", :remote => true, 'data-toggle' => 'modal', 'data-target' => '#ImageSelect', 'data-preview' =>'thanksImagePreview' } %>
+          <input id="competitionThankyouImage" name='competition[thankyou_image]' type='hidden' value=''/>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :birthday, :class => 'control-label' %>
+        <div class="controls">
+          <input type="checkbox" id="competition_birthday" name='competition[birthday]'  value="1" <%= @campaign.birthday ? 'checked' : '' %>>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :likes_sports, :class => 'control-label' %>
+        <div class="controls">
+          <input type="checkbox" id="competition_likes_sports" name='competition[likes_sports]'  value="1" <%= @campaign.likes_sports ? 'checked' : '' %>>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :has_kids, :class => 'control-label' %>
+        <div class="controls">
+          <input type="checkbox" id="competition_has_kids" name='competition[has_kids]'  value="1">
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :active, :class => 'control-label' %>
+        <div class="controls">
+          <input type="checkbox" id="competitionStatus" name='competition[active]' value="1">
+        </div>
+      </div>
+    </fieldset>
+    <div class="form-actions">
+      <%= f.submit 'save' %>
+    </div>
+<%	end  %>

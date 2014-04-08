@@ -1,23 +1,41 @@
-<h1>Galleries</h1>
-<h2>Create A New gallery</h2>
-<%= render :partial => 'galleries/partials/form' %>
-<ul>
-  <% @galleries.each do |gallery| %>
-      <li>
-        <%= gallery.album_name %>
-        <%= link_to 'Go To Gallery', "#{gallery.id}" %>
+<div class="row">
+  <div class="col-md-8">
+    <h1>Galleries</h1>
+  </div>
+  <div class="col-md-4">
+    <%= link_to "Create New Gallery", "#", {:class => "btn btn-primary galleryCreateModal", :remote => true, 'data-toggle' => 'modal', 'data-target' => '#galleryCreate' } %>
+  </div>
+</div>
 
-        <% @images.each_slice(6) do |slice| %>
-            <div class="row">
-              <% @images.each do |image| %>
-                  <% if image.fk_gallery_id === gallery.id %>
-                      <div class="col-md-2">
-                        <%= image_tag image.images.thumb.url %>
-                      </div>
-                  <% end %>
+<div class="panel-group" id="accordion">
+  <% @i = 0 %>
+  <% @galleries.each do |gallery| %>
+      <% @i += 1 %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 data-toggle="collapse" data-parent="accordion" data-target="#gallery<%= @i %>">
+                    <%= gallery.album_name %>
+              <%= link_to 'Go To Gallery', "#{gallery.id}", :class => 'btn btn-success pull-right' %>
+            </h4>
+        </div>
+        <div class="panel-collapse collapse <%= (@i === 1)? 'in' : 'out' %>" id="gallery<%= @i %>">
+            <div class="panel-body">
+              <% @images.each_slice(6) do |slice| %>
+                  <div class="row">
+                    <% @images.each do |image| %>
+                        <% if image.gallery_id === gallery.id %>
+                            <div class="col-md-2">
+                              <%= image_tag image.images.thumb.url %>
+                            </div>
+                        <% end %>
+                    <% end %>
+                  </div>
               <% end %>
             </div>
-        <% end %>
-      </li>
+        </div>
+      </div>
   <% end %>
-</ul>
+</div>
+
+ <!-- // CREATE GALLERY FORM-->
+<%= render :partial => 'galleries/partials/createAlbumForm' %>

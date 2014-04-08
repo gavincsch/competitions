@@ -11,11 +11,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140120170413) do
+ActiveRecord::Schema.define(version: 20140126190827) do
+
+  create_table "competitions", force: true do |t|
+    t.string   "campaign"
+    t.string   "campaign_url"
+    t.datetime "date_from"
+    t.datetime "date_to"
+    t.string   "enter_image"
+    t.string   "thankyou_image"
+    t.boolean  "birthday"
+    t.boolean  "likes_sports"
+    t.boolean  "has_kids"
+    t.integer  "entries",        default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "active",         default: false
+  end
+
+  create_table "entries", force: true do |t|
+    t.string   "firstname"
+    t.string   "surname"
+    t.string   "email"
+    t.integer  "mobile"
+    t.string   "region"
+    t.date     "dob"
+    t.integer  "gender"
+    t.boolean  "newsletter",     default: false
+    t.string   "source"
+    t.boolean  "q1",             default: false
+    t.boolean  "q2",             default: false
+    t.integer  "competition_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "galleries", force: true do |t|
     t.string   "album_name"
-    t.integer  "image_count"
+    t.integer  "image_count", default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -25,7 +58,7 @@ ActiveRecord::Schema.define(version: 20140120170413) do
   create_table "images", force: true do |t|
     t.string   "images"
     t.string   "image_name"
-    t.integer  "fk_gallery_id"
+    t.integer  "gallery_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

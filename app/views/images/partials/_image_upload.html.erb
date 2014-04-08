@@ -8,7 +8,7 @@
       <%= form_for @image,  :html => { :multipart => true } do |image| %>
           <div class="modal-body">
 
-                <%= image.hidden_field :fk_gallery_id, :value => @gallery.id  %>
+                <%= image.hidden_field :gallery_id, :value => @gallery.id  %>
                 <%= image.file_field :images %>
 
           </div>

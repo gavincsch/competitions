@@ -1,0 +1,20 @@
+<div class="modal fade" id="ImageSelect" title="My modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button aria-hidden="true" class="close" data-dismiss="modal" type="button">×</button>
+        <h3 id="modalTitle">Select Image</h3>
+      </div>
+
+          <div class="modal-body">
+            <% @images.each do |image|%>
+                  <img src="<%=image.images.thumb.url %>" data-value="<%= image.images_url %>" data-preview="<%= image.images.thumb.url %>">
+            <% end %>
+
+          </div>
+          <div class="modal-footer">
+            <button aria-hidden="true" class="close" data-dismiss="modal" type="button">Select</button>
+          </div>
+    </div>
+  </div>
+</div>

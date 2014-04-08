@@ -1,5 +1,5 @@
 class IndexController < ApplicationController
- before_filter :confirm_logged_in , :is_admin
+ before_filter :confirm_logged_in
   def index
 
   end

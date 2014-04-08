@@ -9,7 +9,7 @@ class GalleriesController < ApplicationController
   def show
     @gallery = Gallery.find(params[:id])
     @image = Image.new(params[@gallery.id])
-    @images = Image.find_all_by_fk_gallery_id(@gallery.id)
+    @images = Image.find_all_by_gallery_id(@gallery.id)
   end
 
   def create
