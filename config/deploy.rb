@@ -1,77 +1,67 @@
-require "bundler/capistrano"
+# Ensure that bundle is used for rake tasks
+SSHKit.config.command_map[:rake] = "bundle exec rake"
 
-set :stages, %w(production staging)
-set :default_stage, "staging"
-require 'capistrano/ext/multistage'
+# config valid only for Capistrano 3.1
+lock '3.1.0'
 
-#	Application
-set :rails_env, "production" #added for delayed job  
-set :application, "blair"
+set :application, 'blair'
+set :rails_env, "production"
+set :repo_url, 'git@github.com:GavinCS/lead-gen.git'
 
+# Default branch is :master
+ ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
-# Settings
-set :deploy_to, "/var/www/blair.dev/"
+# Default deploy_to directory is /var/www/my_app
+set :deploy_to, '/var/www/blair.dev/'
 set :deploy_via, :remote_cache
-# set :use_sudo, true
-default_run_options[:pty] = true
-set :ssh_options, { :forward_agent => true }
 
-# Server - SEE CONFIG/DEPLOY/
+# Default value for :scm is :git
+#set :scm, :git
 
-# Source Code SEE CONFIG/DEPLOY/
+# Default value for :format is :pretty
+# set :format, :pretty
+
+# Default value for :log_level is :debug
+# set :log_level, :debug
+
+# Default value for :pty is false
+# set :pty, true
+
+# Default value for :linked_files is []
+#set :linked_files, %w{config/database.yml}
+
+# Default value for linked_dirs is []
+#set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+
+# Default value for default_env is {}
+#set :default_env, { path: "/opt/ruby/bin:$PATH" }
+
+## Default value for keep_releases is 5
+set :keep_releases, 5
+
+#set(:config_files, %w(database.example.yml))
+
+#set :tests, ["spec"]
 
 namespace :deploy do
 
-  #restart passenger after each deploy
-  task :start do ; end
-  task :stop do ; end
-  task :restart, :roles => :app, :except => { :no_release => true } do
-    run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-
-  end
-
-  task :setup_config  do
-    desc "Tasks for first setting up the app"
-    #cap doesnt do this, so lets tell it to do it
-    run "mkdir -p #{shared_path}/config"
-    #create the database.yml on the server
-    run "#{try_sudo} touch #{shared_path}/config/database.yml "
-    puts "Now edit the database config in #{shared_path}."
-
-  end
-
-  after "deploy:setup", "deploy:setup_config"
-
-  before "deploy:update_code", "deploy:change_ownership"
-
-  task :change_ownership, roles: :app do
-    run "#{try_sudo} chown -R #{user}:#{user} /var/www/blair.dev"
-  end
-
-  task :symlink_config, roles: :app do
-    desc "Deploy the needed symlinks"
-    run "cp #{shared_path}/config/database.yml #{release_path}/config/"
-  end
-
-  after "deploy:finalize_update", "deploy:symlink_config"
-
-  task :reset_ownership, roles: :app do
-    desc "Change ownership from deployer to www-data"
-    run "#{try_sudo} chown -R www-data:www-data /var/www/blair.dev"
-    run "#{try_sudo} chmod -R 777 #{release_path}/log"
-  end
-
-  namespace :assets do
-    task :precompile, :roles => :web, :except => { :no_release => true } do
-      from = source.next_revision(current_revision)
-      if capture("cd #{latest_release} && #{source.local.log(from)} vendor/assets/ app/assets/ | wc -l").to_i > 0
-        run %Q{cd #{latest_release} && #{rake} RAILS_ENV=#{rails_env} #{asset_env} assets:precompile}
-     else
-        logger.info "Skipping asset pre-compilation because there were no asset changes"
-      end
+  desc 'Restart application'
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      # Restarts Phusion Passenger
+      execute :touch, release_path.join('tmp/restart.txt')
     end
   end
 
-  after "deploy:assets:precompile", "deploy:reset_ownership"
+  after :publishing, :restart
+
+  after :restart, :clear_cache do
+    on roles(:web), in: :groups, limit: 3, wait: 10 do
+      # Here we can do anything such as:
+      # within release_path do
+      #   execute :rake, 'cache:clear'
+      # end
+    end
+  end
 
 end

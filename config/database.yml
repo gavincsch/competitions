@@ -21,10 +21,10 @@ test:
   socket: /tmp/mysql.sock
 
 production:
-  adapter: mysql2
+  adapter: mysql
   encoding: utf8
   database: blair_production
   pool: 5
-  username: root
-  password:
-  socket: /tmp/mysql.sock
+  username: blairApp
+  password: dbBlairdevdemo
+  socket: /var/run/mysqld/mysqld.sock

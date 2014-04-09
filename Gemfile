@@ -30,6 +30,9 @@ group :development, :test do
   gem 'guard-livereload'
   gem 'capybara', '2.2.1'
   gem 'factory_girl_rails'
+
+  gem 'capistrano-rails',   '~> 1.1', require: false
+  gem 'capistrano-bundler', '~> 1.1', require: false
 end
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -48,4 +51,4 @@ end
 
 
 # Use Capistrano for deployment
-gem 'capistrano', group: :development
+gem 'capistrano', '~> 3.0', require: false,  group: :development
