@@ -9,6 +9,7 @@ gem 'simple_form'
 gem 'country_select'
 gem 'mini_magick'
 gem 'jquery-rails'
+gem 'jquerymobile-rails', '~> 0.2.3'
 
 
 gem 'activerecord-session_store', github: 'rails/activerecord-session_store'

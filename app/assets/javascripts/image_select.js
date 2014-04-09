@@ -13,7 +13,17 @@ $(document).ready(function(){
 
     });
 
+
     $('#ImageSelect img').on('click',function(){
+
+        var inputValue      = $(this).data('value');
+        var previewValue    = $(this).data('preview');
+
+        $('#' + inputId).val(inputValue);
+        $('#' + preview).attr('src' , previewValue);
+    });
+
+    $('#ImageSelect img').on('tap',function(){
 
         var inputValue      = $(this).data('value');
         var previewValue    = $(this).data('preview');
