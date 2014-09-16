@@ -3,6 +3,8 @@
 Ruby 2
 Rails 4
 
+Please note this app is currently under development and is not ready for use.
+
 Simple project to create and manage competition pages.
 
 Features:
