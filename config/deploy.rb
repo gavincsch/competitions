@@ -9,7 +9,7 @@ set :rails_env, "production"
 set :repo_url, 'git@github.com:GavinCS/lead-gen.git'
 
 # Default branch is :master
- ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
+# ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
 # Default deploy_to directory is /var/www/my_app
 set :deploy_to, '/var/www/blair.dev/'
@@ -25,25 +25,46 @@ set :deploy_via, :remote_cache
 # set :log_level, :debug
 
 # Default value for :pty is false
-# set :pty, true
+#set :pty, false
 
 # Default value for :linked_files is []
-#set :linked_files, %w{config/database.yml}
+set :linked_files, %w{config/database.yml}
 
 # Default value for linked_dirs is []
-#set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/uploads}
 
 # Default value for default_env is {}
-#set :default_env, { path: "/opt/ruby/bin:$PATH" }
+#set :default_env, :production
 
 ## Default value for keep_releases is 5
 set :keep_releases, 5
 
-#set(:config_files, %w(database.example.yml))
+set(:config_files, %w(database.example.yml))
 
 #set :tests, ["spec"]
 
 namespace :deploy do
+
+
+  desc "Change ownership to deployer"
+  task :change_ownership  do
+    on roles(:app) do
+      execute :sudo, :chown, "-R #{fetch(:user)}:#{fetch(:user)} /var/www/blair.dev"
+    end
+  end
+
+  before "deploy:starting", "deploy:change_ownership"
+  #before "deploy:check:make_linked_dirs", "setup_config"
+
+
+  desc "Change ownership from deployer to www-data"
+  task :reset_ownership do
+    on roles(:app) do
+      execute :sudo, :chown, "-R www-data:www-data /var/www/blair.dev"
+    end
+  end
+
+  after "deploy:finished", "deploy:reset_ownership"
 
   desc 'Restart application'
   task :restart do

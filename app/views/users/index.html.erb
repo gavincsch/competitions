@@ -1,41 +1,47 @@
-Users
-<table>
-  <tr>
-    <th>User</th>
-    <th>Email</th>
-    <th>Actions</th>
-  </tr>
-<% if @isAdmin %>
-    <% @users.each do |user| %>
-             <tr>
-                <td><%= user.name %></td>
-                <td><%= user.email %></td>
-                <td>
-                  <ul>
-                    <li><%= link_to 'Edit', edit_user_path(user), class: 'btn btn-success' %></li>
-
-                        <li><%= link_to 'Delete', user, method: :delete,:data => { :confirm => "Are you sure?" }, class: 'btn btn-danger' %></li>
-
-                  </ul>
-                </td>
+<div class="row">
+    <div class="col-md-8">
+      <h1>Users</h1>
+    </div>
+    <div class="col-md-4">
+      <%= link_to link_to 'create new user', "#newUser", :class => 'btn btn-primary newUserModal', 'data-toggle' => 'modal'  %>
+    </div>
+  </div>
+  <table>
+    <tr>
+      <th>User</th>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+    <% if @isAdmin %>
+        <% @users.each do |user| %>
+            <tr>
+              <td><%= user.name %></td>
+              <td><%= user.email %></td>
+              <td>
+                <ul class="btn-actions clearfix">
+                  <li><%= link_to 'Delete', user, method: :delete,:data => { :confirm => "Are you sure?" }, class: 'btn btn-danger' %></li>
+                  <li><%= link_to 'Edit', edit_user_path(user), class: 'btn btn-primary' %></li>
+                </ul>
+              </td>
             </tr>
-    <% end %>
-<% else %>
-      <tr>
-        <td><%= @currentUser.name %></td>
-        <td><%= @currentUser.email %></td>
-        <td>
-          <ul>
-            <li><%= link_to 'Edit', edit_user_path(@currentUser), class: 'btn btn-success' %></li>
-          </ul>
-        </td>
-      </tr>
+        <% end %>
+    <% else %>
+        <tr>
+          <td><%= @currentUser.name %></td>
+          <td><%= @currentUser.email %></td>
+          <td>
+            <ul>
+              <li><%= link_to 'Edit', edit_user_path(@currentUser), class: 'btn btn-success' %></li>
+            </ul>
+          </td>
+        </tr>
 
-<% end %>
-</table>
-<%= link_to "create new user", "#newUser", :class => "btn newUserModal", "data-toggle" => "modal" %>
+    <% end %>
+  </table>
+
+</div>
+
 <div class="modal fade in " id="newUser" title="My modal">
     <%= render 'new' %>
 </div>
-
 

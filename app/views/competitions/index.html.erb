@@ -24,12 +24,14 @@
         <td><%= campaign.date_from.to_formatted_s(:short) %></td>
         <td><%=	 campaign.entries.count %></td>
         <td>
-          <div class="row">
-            <%= link_to 'edit', edit_competition_path(campaign.campaign), :class => 'btn btn-primary' %>
-          </div>
-          <div class="row">
-            <%= link_to 'delete', campaign, method: :delete, :data => {:confirm => "Are your sure?"}, :class => 'btn btn-danger' %>
-          </div>
+          <ul class="btn-actions clearfix">
+            <li>
+              <%= link_to 'delete', campaign, method: :delete, :data => {:confirm => "Are your sure?"}, :class => 'btn btn-danger' %>
+            </li>
+            <li>
+                <%= link_to 'edit', edit_competition_path(campaign.campaign), :class => 'btn btn-primary' %>
+            </li>
+          </ul>
         </td>
       </tr>
   <% end %>

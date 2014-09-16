@@ -9,8 +9,8 @@ gem 'simple_form'
 gem 'country_select'
 gem 'mini_magick'
 gem 'jquery-rails'
-gem 'jquerymobile-rails', '~> 0.2.3'
-
+gem 'groupdate'
+gem 'chartkick', '~> 1.2.4'
 
 gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
 
@@ -20,6 +20,7 @@ group :assets do
   gem 'coffee-rails', '~> 4.0.0'
   gem 'therubyracer', platforms: :ruby
   gem 'carrierwave'
+
 end
 
 group :development, :test do
@@ -30,6 +31,7 @@ group :development, :test do
   gem 'guard-livereload'
   gem 'capybara', '2.2.1'
   gem 'factory_girl_rails'
+  gem 'faker'
 
   gem 'capistrano-rails',   '~> 1.1', require: false
   gem 'capistrano-bundler', '~> 1.1', require: false

@@ -12,9 +12,11 @@
     <header>
       <%= @userAuthenticated ? (render 'layouts/navigation') : '' %>
     </header>
-    <main class="<%= @userAuthenticated ? '': 'container' %>" role="main">
+    <main class='container' role="main">
        <%= render 'layouts/messages' %>
-       <%= yield %>
+      <div class="content">
+        <%= yield %>
+      </div>
     </main>
   </body>
 </html>
