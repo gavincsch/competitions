@@ -1,28 +1,20 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Ruby 2
+Rails 4
 
-Things you may want to cover:
+Simple project to create and manage competition pages.
 
-* Ruby version
+Features:
+    Custom Entry Page image (per competition)
+    Custom Successful entry Page image (per competition)
+    Optional Fields can be added to competitions
+    Newsletter subscription option
 
-* System dependencies
+    Gallery Management
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Future Development
+    Company accounts with multiple users
+    Dashboard for competitions overview
+    Reporting interface
+    Linking to social media accounts / apps
